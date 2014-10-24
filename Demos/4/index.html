@@ -70,16 +70,6 @@
 			log("This peer is the initiator!");
 		});
 
-
-		socket.on('full', function (channel){
-			log('Channel: ' + channel + ' is full! Cannot allow you to enter, sorry :(');
-		});
-
-		socket.on('empty', function (channel){
-			isInitiator = true;
-			log('Channel: ' + channel + ' is empty');
-		});
-
 		socket.on('remotePeerJoining', function (channel){
 			log('Request to join channel: ' + channel);
 			log('You are the initiator!');
@@ -95,6 +85,15 @@
 				message: myMessage
 			});
 
+		});
+
+		socket.on('full', function (channel){
+			log('Channel: ' + channel + ' is full! Cannot allow you to enter, sorry :(');
+		});
+
+		socket.on('empty', function (channel){
+			isInitiator = true;
+			log('Channel: ' + channel + ' is empty');
 		});
 
 		socket.on('log', function (array){

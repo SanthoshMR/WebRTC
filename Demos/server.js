@@ -50,7 +50,7 @@ io.sockets.on('connection', function (socket){
 	socket.on('create or join', function (channel) {
 		var numClients = findClientsSocket(channel).length;
 
-		log('channel ' + channel + ' has ' + numClients + ' client(s)');
+		log('Channel ' + channel + ' has ' + numClients + ' client(s)');
 		log('Request to create or join channel ' + channel);
 
 		if (numClients === 0){
