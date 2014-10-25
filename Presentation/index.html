@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>JSChannel - WebRTC</title>
+
+		<meta name="description" content="A peek into the wonderful world of Web RTC">
+		<meta name="author" content="Santhosh Reddy">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section data-transition="zoom">
+					<h1>Web RTC</h1>
+					<h3>Wonderful world of Real Time Communication <br />on the web!</h3>
+					<p>
+						<small><a href="http://santhoshreddy.com">Santhosh Reddy</a> / <a href="http://twitter.com/santhosh_reddy">@santhosh_reddy</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>WebRTC</h2>
+					<p>
+						Collection of standards, protocols, and JavaScript APIs, the combination of which enables peer-to-peer audio, video, and data sharing between browsers (peers).
+					</p>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>Web <small>v/s</small> WebRTC Architecture</h2>
+					</section>
+					<section>
+						<img src="assets/img/WebRTCArchitecture.png" alt="">
+					</section>
+					<section>
+						<img src="assets/img/WebRTCTriangle.png" alt="">
+						<small>Source: <a href="http://shop.oreilly.com/product/0636920030911.do">Real-Time Communication with WebRTC</a></small>
+					</section>
+					<section>
+						<ul>
+							<li>Connection Management</li>
+							<li>Audio/Video processing capabilities</li>
+							<li>Peer to Peer communication</li>
+							<li>Security</li>
+							<li>Bandwidth management</li>
+							<li>...</li>
+							<li>...</li>
+							<li>...</li>
+							<li>hence...</li>
+							<li>New APIs</li>
+							<li>New Protocols</li>
+							<li>New ...</li>
+						</ul>
+					</section>
+				</section>
+
+				<section id="webrtc-steps">
+					<h3>Steps involved: Overview</h3>
+					<img src="assets/img/WebRTCSteps.jpg" alt="">
+
+					<aside class="notes">
+						1. Create a MediaStream object from your local devices (e.g., microphone, webcam).
+						2. Obtain a URL blob from the local MediaStream.
+						3. Use the obtained URL blob for a local preview.
+						4. Create an RTCPeerConnection object.
+						5. Add the local stream to the newly created connection.
+						6. Send your own session description to the remote peer.
+						7. Receive the remote session description from your peer.
+						8. Process the received session description and add the remote stream to your RTCPeerConnection.
+						9. Obtain a URL blob from the remote stream.
+						10. Use the obtained URL blob to play the remote peer’s audio and/or video.
+					</aside>
+				</section>
+
+				<section>
+					<h2>3 Primary APIs</h2>
+					<ul>
+						<li>MediaStream: Acquisition of Audio and Video streams</li>
+						<li>PeerConnection: Communication of Audio and Video data</li>
+						<li>DataChannel: Communication of arbitrary data</li>
+					</ul>
+				</section>
+
+				<section>
+					<section>
+						<h2>MediaStream</h2>
+						<p>
+							... streams of media data.
+						</p>
+					</section>
+					<section>
+						<ul>
+							<li>Abstraction of actual audio/video data</li>
+							<li>Can contain 0 or multiple tracks</li>
+							<li>Each track has a corresponding MediaStreamTrack associated with it</li>
+							<li>MediaStreamTrack represents content from one or more channels</li>
+							<li>Use <code style="background-color:#555; color: #bbb; padding: 5px; border-radius: 4px">navigator.getUserMedia()</code> with optional constraints</li>
+						</ul>
+					</section>
+					<section>
+						<img src="assets/img/MediaStream.png" alt="">
+					</section>
+					<section>
+						<h2><a href="http://localhost:2014/1/">Demo</a></h2>
+						<br />
+						<h3>Cool Stuff:</h3>
+						<h3><a href="http://webcamtoy.com">WebCam Toy</a></h3>
+						<h3><a href="http://idevelop.ro/ascii-camera/">ASCII Camera</a></h3>
+						<h3><a href="https://chat.meatspac.es/">Chat Meat Spaces!</a></h3>
+					</section>
+					<section>
+						<a href="#/webrtc-steps">Back to Steps</a>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>NAT, ICE, STUN, TURN, SDP...</h2>
+						<p>
+							aka.. Ocean of Acronyms!
+						</p>
+					</section>
+					<section>
+						<h3>ICE - Interactive Connectivity Establishment</h3>
+						<ul>
+							<li>A framework to enable browsers to connect with peers</li>
+							<li>Tries all possibilities in parallel</li>
+							<li>Finds the best path to connect to peers</li>
+						</ul>
+						<br />
+						<br />
+						But why a framework??
+					</section>
+					<section>
+						<h3>Ideal World P2P</h3>
+						<img src="assets/img/IdealWorldP2P.png" alt="">
+					</section>
+					<section>
+						<h3>Real World P2P</h3>
+						<img src="assets/img/RealWorldP2P.png" alt="">
+					</section>
+					<section>
+						<h2>ICE</h2>
+						<ul>
+							<li>Tries to connect using the host address</li>
+							<li>If that fails... which it will for devices behind NATs.</li>
+						</ul>
+						<br />
+						<br />
+						<p>ICE moves on to...</p>
+					</section>
+					<section>
+						<h2>STUN: Session Traversal Utilities for NAT</h2>
+					</section>
+					<section>
+						<img src="assets/img/STUN.png" width="600">
+						&nbsp;&nbsp;
+						<img src="assets/img/STUNConcept.png" class="fragment" width="250">
+						<p class="fragment">Symmetric NAT!</p>
+						<p class="fragment">ICE moves on to...</p>
+					</section>
+					<section>
+						<h2>TURN: Traversal Using Relays around NAT</h2>
+					</section>
+					<section>
+						<img src="assets/img/TURN.png" width="600">
+						&nbsp;&nbsp;
+						<img src="assets/img/TURNConcept.png" class="fragment" width="300">
+					</section>
+					<section>
+						<h2>SDP: Session Description Protocol</h2>
+						<ul>
+							<li>Describes multimedia content of the connection</li>
+							<li>Resolution, formats, codecs, encryption, etc.,</li>
+						</ul>
+					</section>
+					<section>
+						<h3>A sample SDP</h3>
+						<pre><code data-trim>
+v=0
+o=- 7614219274584779017 2 IN IP4 127.0.0.1
+s=-
+t=0 0
+a=group:BUNDLE audio video
+a=msid-semantic: WMS
+m=audio 1 RTP/SAVPF 111 103 104 0 8 107 106 105 13 126
+c=IN IP4 0.0.0.0
+a=rtcp:1 IN IP4 0.0.0.0
+a=ice-ufrag:W2TGCZw2NZHuwlnf
+a=ice-pwd:xdQEccP40E+P0L5qTyzDgfmW
+a=extmap:1 urn:ietf:params:rtp-hdrext:ssrc-audio-level
+a=mid:audio
+a=rtcp-mux
+a=crypto:1 AES_CM_128_HMAC_SHA1_80 inline:9c1AHz27dZ9xPI91YNfSlI67/EMkjHHIHORiClQe
+a=rtpmap:111 opus/48000/2
+...
+    				</code></pre>
+    				More details: <a href="http://datatracker.ietf.org/doc/draft-nandakumar-rtcweb-sdp/?include_text=1">IETF Examples</a>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>RTCPeerConnection</h2>
+						<ul>
+							<li>Abstraction for a communication channel between 2 users/browsers</li>
+							<li>Configuration parameter to find access to STUN and TURN servers</li>
+						</ul>
+					</section>
+					<section>
+						<h2><a href="http://localhost:2014/2/">Demo</a></h2>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>RTCDataChannel</h2>
+						<ul>
+							<li>P2P API to send and receive generic application data</li>
+							<li>Works with PeerConnection API - low latency, fewer hops</li>
+							<li>Draws inspiration from WebSockets</li>
+							<li>RTCDataChannelInit is used to configure properties</li>
+							<li>Secure and uses SCTP</li>
+						</ul>
+					</section>
+					<section>
+						<h2><a href="http://localhost:2014/3/">DEMO</a></h2>
+						<br />
+						<h3>Cool Stuff:</h3>
+						<h3><a href="http://sharefest.me">Sharefest</a></h3>
+						<h3><a href="https://hacks.mozilla.org/2013/03/webrtc-data-channels-for-great-multiplayer/">Banana Bread</a></h3>
+						<h3><a href="https://peercdn.com/">PeerCDN</a></h3>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Signaling</h2>
+						Revisited...
+					</section>
+					<section>
+						<ul>
+							<li>Process of coordinating communication</li>
+							<li>Not implemented by WebRTC APIs</li>
+							<li>Why?...</li>
+						</ul>
+					</section>
+					<section>
+						<ul>
+							<li>To avoid redundancy</li>
+							<li>To maximize compatability with existing technologies</li>
+							<li>Also, avoids browsers having to maintain state!</li>
+						</ul>
+					</section>
+					<section>
+						<img src="assets/img/JSEPSignaling.png">
+					</section>
+					<section>
+						<h3>3 types of information:</h3>
+						<ul>
+							<li>Media session management</li>
+							<li>Node's network configuration</li>
+							<li>Node's multimedia capabilities</li>
+						</ul>
+					</section>
+					<section>
+						<h2><a href="http://localhost:2014/4/">DEMO</a></h2>
+					</section>
+				</section>
+
+				<section>
+					<section class="listing">
+						<h2>WebRTC Libraries</h2>
+						<p>Lot of options!</p>
+						<br />
+						<ul>
+							<li><a href="http://simplewebrtc.com/">SimpleWebRTC</a></li>
+							<li><a href="http://easyrtc.com/">easyRTC</a></li>
+							<li><a href="http://peerjs.com/">PeerJS</a></li>
+							<li><a href="http://www.rtcmulticonnection.org/">RTCMultiConnection</a></li>
+						</ul>
+					</section>
+					<section>
+						<h2><a href="http://localhost:2014/5/">DEMO</a></h2>
+					</section>
+				</section>
+
+				<section>
+					<h2><a href="http://localhost:2014/5/">Full fledged app!</a></h2>
+				</section>
+
+				<section>
+					<h2>References</h2>
+					<ul>
+						<li><a href="http://shop.oreilly.com/product/0636920030911.do">Real-Time Communication with WebRTC</a></li>
+						<li><a href="http://html5rocks.com/">HTML5 Rocks!</a></li>
+					</ul>
+				</section>
+
+				<section>
+					<h1>Thank You!</h1>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
